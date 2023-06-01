@@ -1,20 +1,28 @@
 import { test, expect } from '@jest/globals';
-import { getHealthStatus } from '../character';
+import Character from '../character';
 
-test('функция возвращает "healthy", когда значение "health" больше 50', () => {
-  const character = { name: 'Mar', health: 90 };
-  const result = getHealthStatus(character);
-  expect(result).toBe('healthy');
+test('Повышение уровня у живого персонажа', () => {
+  const character = new Character('John', 'Bowman');
+  character.levelUp();
+  expect(character.level).toBe(2);
+  expect(character.attack).toBe(30);
+  expect(character.defence).toBe(30);
 });
 
-test('функция возвращает "wounded", когда значение "health" находится в диапазоне от 50 до 15', () => {
-  const character = { name: 'Mar', health: 30 };
-  const result = getHealthStatus(character);
-  expect(result).toBe('wounded');
+test('Попытка повысить уровень умершего персонажа', () => {
+  const character = new Character('John', 'Bowman');
+  character.health = 0;
+  expect(() => character.levelUp()).toThrowError('Нельзя повысить уровень умершего персонажа');
 });
 
-test('функция возвращает "critical", когда значение "health" меньше 15', () => {
-  const character = { name: 'Mar', health: 10 };
-  const result = getHealthStatus(character);
-  expect(result).toBe('critical');
+test('Урон по живому персонажу', () => {
+  const character = new Character('John', 'Bowman');
+  character.damage(20);
+  expect(character.health).toBe(95);
+});
+
+test('Урон по умершему персонажу', () => {
+  const character = new Character('John', 'Bowman');
+  character.health = 0;
+  expect(() => character.damage(20)).toThrowError('Нельзя нанести урон умершему персонажу');
 });
