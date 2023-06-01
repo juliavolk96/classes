@@ -83,3 +83,52 @@ test('Создание персонажа типа Daemon', () => {
   expect(character.attack).toBe(10);
   expect(character.defence).toBe(40);
 });
+
+test('Нанесение урона живому персонажу с здоровьем менее или равным 0', () => {
+  const character = new Character('John', 'Bowman');
+  character.health = -10;
+  expect(() => character.damage(20)).toThrow('Нельзя нанести урон умершему персонажу');
+});
+
+test('Нанесение урона живому персонажу, превышающему его текущее здоровье', () => {
+  const character = new Character('John', 'Bowman');
+  character.health = 10;
+  character.damage(20);
+  expect(character.health).toBe(0);
+});
+
+test('Восстановление здоровья у живого персонажа', () => {
+  const character = new Character('John', 'Bowman');
+  character.health = 50;
+  character.heal(20);
+  expect(character.health).toBe(70);
+});
+
+test('Восстановление здоровья умершего персонажа', () => {
+  const character = new Character('John', 'Bowman');
+  character.health = 0;
+  expect(() => character.heal(20)).toThrow('Нельзя восстановить здоровье умершего персонажа');
+});
+
+test('Нанесение урона живому персонажу с здоровьем равным 0', () => {
+  const character = new Character('John', 'Bowman');
+  character.health = 0;
+  expect(() => character.damage(20)).toThrow('Нельзя нанести урон умершему персонажу');
+});
+
+test('Восстановление здоровья живого персонажа сверх максимального значения', () => {
+  const character = new Character('John', 'Bowman');
+  character.health = 90;
+  character.heal(20);
+  expect(character.health).toBe(100);
+});
+
+test('Ошибкапри использовании некорректного типа персонажа', () => {
+  expect(() => {
+    new Character('John', 'UnknownType');
+  }).toThrowError('Некорректный тип персонажа');
+});
+
+test('Создание персонажа с неизвестным типом', () => {
+  expect(() => new Character('John', 'UnknownType')).toThrow('Некорректный тип персонажа');
+});

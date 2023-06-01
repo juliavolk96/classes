@@ -40,7 +40,7 @@ class Character {
         this.defence = 40;
         break;
       default:
-        break;
+        throw new Error('Некорректный тип персонажа');
     }
   }
 
@@ -56,13 +56,24 @@ class Character {
   }
 
   damage(points) {
-    if (this.health === 0) {
+    if (this.health <= 0) {
       throw new Error('Нельзя нанести урон умершему персонажу');
     }
 
     this.health -= points * (1 - this.defence / 100);
     if (this.health < 0) {
       this.health = 0;
+    }
+  }
+
+  heal(points) {
+    if (this.health <= 0) {
+      throw new Error('Нельзя восстановить здоровье умершего персонажа');
+    }
+
+    this.health += points;
+    if (this.health > 100) {
+      this.health = 100;
     }
   }
 }
