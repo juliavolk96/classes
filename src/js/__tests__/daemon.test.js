@@ -2,7 +2,7 @@ import { test, expect } from '@jest/globals';
 
 import Daemon from '../daemon';
 
-test('creates a daemon with the correct properties', () => {
+test('создает демона с правильными свойствами', () => {
   const daemon = new Daemon('Azazel');
   expect(daemon.name).toBe('Azazel');
   expect(daemon.type).toBe('Daemon');

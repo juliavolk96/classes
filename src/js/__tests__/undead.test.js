@@ -2,7 +2,7 @@ import { test, expect } from '@jest/globals';
 
 import Undead from '../undead';
 
-test('creates an undead with the correct properties', () => {
+test('создает нежить с правильными свойствами', () => {
   const undead = new Undead('Dracula');
   expect(undead.name).toBe('Dracula');
   expect(undead.type).toBe('Undead');

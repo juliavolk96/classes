@@ -2,7 +2,7 @@ import { test, expect } from '@jest/globals';
 
 import Bowman from '../bowman';
 
-test('creates a bowman with the correct properties', () => {
+test('создает лучника с правильными свойствами', () => {
   const bowman = new Bowman('Robin');
   expect(bowman.name).toBe('Robin');
   expect(bowman.type).toBe('Bowman');

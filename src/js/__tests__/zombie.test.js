@@ -2,7 +2,7 @@ import { test, expect } from '@jest/globals';
 
 import Zombie from '../zombie';
 
-test('creates a zombie with the correct properties', () => {
+test('создает зомби с правильными свойствами', () => {
   const zombie = new Zombie('Frank');
   expect(zombie.name).toBe('Frank');
   expect(zombie.type).toBe('Zombie');

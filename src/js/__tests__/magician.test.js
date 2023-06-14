@@ -2,7 +2,7 @@ import { test, expect } from '@jest/globals';
 
 import Magician from '../magician';
 
-test('creates a magician with the correct properties', () => {
+test('создает мага с правильными свойствами', () => {
   const magician = new Magician('Merlin');
   expect(magician.name).toBe('Merlin');
   expect(magician.type).toBe('Magician');
